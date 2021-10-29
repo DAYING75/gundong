@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="js/pixi.min.js"></script>
+    <script>
+		var app = new PIXI.Application(1366,768);
+        document.body.appendChild(app.view);
+        
+        var bg = new PIXI.Sprite.fromImage("res/bg.png");
+        app.stage.addChild(bg);
+		bg.scale.y=0.4;
+		bg.scale.x=0.4;
+		
+		var ren = new PIXI.Sprite.fromImage("res/人.png");
+		app.stage.addChild(ren);
+		ren.y = 430;
+		ren.scale.y=0.4;
+		ren.scale.x=0.4;
+		
+		/*
+		var riben = new PIXI.Sprite.fromImage("res/日本.png");
+		bg.addChild(riben);
+		riben.x =405;
+		riben.y =205;
+ 
+		*/
+		window.addEventListener("wheel", function(e) { 
+			let evt = e || window.event;  //考虑兼容性
+				evt.preventDefault();
+				if (evt.deltaY > 0){
+					bg.x -= 50;
+					ren.x -=10;
+					if(ren.x <= -2100){
+						ren.x = 0;
+					}
+					if(bg.x <= -2100){
+						bg.x = 0;
+					}
+				}
+				else{
+					bg.x += 50;
+					ren.x += 10;
+					if(ren.x > 0){
+						ren.x = -2100;
+					}
+					if(bg.x > 0){
+						bg.x = -2100;
+					}
+				}
+				console.log(evt.type, evt.deltaX, evt.deltaY, evt.deltaZ);
+				}, {
+				    passive: false
+				});
+		/*		
+		var zuobiaoX = new PIXI.Text("X: a");
+		zuobiaoX.x = 30;
+		zuobiaoX.y = 500;
+		zuobiaoX.style.fill = 0xff0000;
+		app.stage.addChild(zuobiaoX);
+		
+		var zuobiaoY = new PIXI.Text("Y: b");
+		zuobiaoY.x = 30;
+		zuobiaoY.y = 530;
+		zuobiaoY.style.fill = 	0xff0000;
+		app.stage.addChild(zuobiaoY);
+		
+		bg.interactive = true;
+		bg.on("mousemove",movePlane);
+		function movePlane(event) {
+		    var pos = event.data.getLocalPosition(app.stage);
+		    
+		    zuobiaoX.text = "X: "+pos.x;
+		    zuobiaoY.text = "Y: "+pos.y;
+		}
+				
+		var ribenl = new PIXI.Sprite.fromImage("res/ribenl.png");
+		riben.addChild(ribenl);
+		ribenl.visible = false;
+		
+		riben.interactive = true ;
+		riben.on("mouseover",lightRiben);
+		function lightRiben(){
+			ribenl.visible = true;
+		}
+		riben.on("mouseout",offRiben);
+		function offRiben(){
+			ribenl.visible = false;
+		}
+		
+		
+		/*
+		var gaoli = new PIXI.Sprite.fromImage("res/gaoli.png");
+		app.stage.addChild(gaoli);
+		gaoli.scale.y=0.4;
+		gaoli.scale.x=0.4;
+		
+		var dongnanya = new PIXI.Sprite.fromImage("res/dongnanya.png");
+		app.stage.addChild(dongnanya);
+		dongnaya.scale.y=0.4;
+		dongnaya.scale.x=0.4;
+		
+		riben.interactive = true;
+		riben.on("mouse")
+		*/
+		
+    </script>
+</body>
+</html>
